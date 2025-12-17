@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhoneHub Pro | Premium Smartphones for Sale</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+
+    body { background: #f0f4f8; color: #2a2a2a; line-height: 1.6; }
+
+    header {
+      background: linear-gradient(135deg, #0a1f2b, #1e3a4a, #2a5368);
+      color: #fff;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: background 0.4s ease, padding 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(10, 31, 43, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 10px 50px;
+    }
+
+    header h1 { font-size: 26px; font-weight: 600; }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 15px;
+      border-radius: 25px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    nav a.active {
+      background: #fff;
+      color: #2a5368;
+    }
+
+    .search-bar {
+      margin-left: 20px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 25px;
+      padding: 5px 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      outline: none;
+      width: 150px;
+      transition: width 0.3s ease;
+    }
+
+    .search-bar input:focus { width: 250px; }
+
+    main { margin-top: 0; }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 100px 80px 80px;
+      background: linear-gradient(to bottom, #ffffff, #f0f4f8);
+      min-height: 80vh;
+    }
+
+    .hero-text {
+      max-width: 45%;
+    }
+
+    .hero-text h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #2a5368;
+      line-height: 1.2;
+    }
+
+    .hero-text p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .hero-text button {
+      padding: 15px 35px;
+      background: #2a5368;
+      color: #fff;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 30px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .hero-text button:hover {
+      background: #1e3a4a;
+      transform: scale(1.05);
+    }
+
+    .hero img {
+      width: 50%;
+      max-width: 550px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transition: transform 0.5s ease;
+    }
+
+    .hero img:hover { transform: rotate(3deg) scale(1.02); }
+
+    .featured {
+      padding: 80px 80px;
+      background: #f0f4f8;
+      text-align: center;
+    }
+
+    .featured h2 {
+      font-size: 36px;
+      margin-bottom: 50px;
+      color: #2a5368;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+
+    .product {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, outline 0.3s ease;
+      outline: 2px solid transparent;
+      outline-offset: 5px;
+    }
+
+    .product:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      outline: 2px solid #2a5368;
+    }
+
+    .product img {
+      width: 100%;
+      height: 320px;
+      object-fit: contain;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .product h3 {
+      margin-bottom: 15px;
+      color: #1e3a4a;
+      font-size: 24px;
+    }
+
+    .product p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #666;
+    }
+
+    .product .price {
+      font-size: 26px;
+      font-weight: bold;
+      color: #2a5368;
+      margin-bottom: 20px;
+    }
+
+    .product button {
+      padding: 12px 25px;
+      background: #2a5368;
+      color: #fff;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 30px;
+      transition: background 0.3s ease;
+    }
+
+    .product button:hover { background: #1e3a4a; }
+
+    .why-us {
+      padding: 80px;
+      background: #ffffff;
+      text-align: center;
+    }
+
+    .why-us h2 {
+      font-size: 36px;
+      margin-bottom: 40px;
+      color: #2a5368;
+    }
+
+    .why-us ul {
+      list-style: none;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .why-us li {
+      font-size: 18px;
+      margin: 20px 0;
+      padding-left: 40px;
+      position: relative;
+      text-align: left;
+    }
+
+    .why-us li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #2a5368;
+      font-size: 24px;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #2a5368, #1e3a4a);
+      color: #fff;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .cta h2 { font-size: 36px; margin-bottom: 20px; }
+
+    .cta p { font-size: 20px; margin-bottom: 30px; }
+
+    .cta button {
+      padding: 15px 35px;
+      font-size: 18px;
+      border: none;
+      background: #fff;
+      color: #1e3a4a;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .cta button:hover {
+      background: #f0f4f8;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: #0a1f2b;
+      color: #fff;
+      text-align: center;
+      padding: 25px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .hero { flex-direction: column; padding: 80px 40px; text-align: center; }
+      .hero-text { max-width: 100%; margin-bottom: 40px; }
+      .hero img { width: 80%; }
+      header { padding: 15px 30px; }
+      nav a { margin-left: 15px; }
+      .search-bar input { width: 120px; }
+      .search-bar input:focus { width: 200px; }
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; padding: 15px; }
+      nav { margin-top: 10px; flex-wrap: wrap; justify-content: center; }
+      nav a { margin: 5px 10px; }
+      .hero { padding: 60px 20px; }
+      .featured, .why-us { padding: 60px 20px; }
+      .product-grid { gap: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<header id="header">
+  <h1>PhoneHub Pro</h1>
+  <nav>
+    <a href="#" class="active" data-target="home">Home</a>
+    <a href="#featured" data-target="featured">Shop</a>
+    <a href="#why-us" data-target="why-us">Why Us</a>
+    <a href="#cta" data-target="cta">Contact</a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search phones...">
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h2>Unlock the Future with Premium Smartphones</h2>
+      <p>Discover the latest 2025 flagships from top brands. Unmatched performance, cutting-edge AI, stunning cameras, and exclusive deals with fast shipping.</p>
+      <button onclick="scrollToSection('featured')">Shop Now</button>
+    </div>
+    <img src="https://cdn.prod.website-files.com/630d4d1c4a462569dd189855/6823c2b6d7090bd22f51f478_Best%20Phone%20Screens.webp" alt="Premium flagship smartphones showcase 2025" />
+  </section>
+
+  <section class="featured" id="featured">
+    <h2>Featured 2025 Flagships</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img src="https://www.cultofmac.com/wp-content/uploads/2024/12/iPhone-17-Pro-Max-renders-1.jpg" alt="Apple iPhone 17 Pro Max" />
+        <h3>iPhone 17 Pro Max</h3>
+        <p>Ultimate performance with A19 Pro chip, advanced triple-camera system, and Dynamic Island evolution.</p>
+        <div class="price">$1,419</div>
+        <button>Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="https://m-cdn.phonearena.com/images/article/166266-wide-two_1200/Updated-Galaxy-S25-Ultra-renders-correct-a-previous-mistake.jpg" alt="Samsung Galaxy S25 Ultra" />
+        <h3>Samsung Galaxy S25 Ultra</h3>
+        <p>Flagship with S Pen, 200MP camera, Snapdragon 8 Elite, and vibrant AMOLED display.</p>
+        <div class="price">$1,299</div>
+        <button>Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="https://external-preview.redd.it/exclusive-official-google-pixel-10-pro-renders-v0-UUYMuFat75wnPdDKrfjBVSdedtOSrP7Wf17lcUeKWzs.jpeg?width=1080&crop=smart&auto=webp&s=64dff3c5136064ed67743e2822e571795299b7b3" alt="Google Pixel 10 Pro" />
+        <h3>Google Pixel 10 Pro</h3>
+        <p>AI-powered photography, Tensor G5 chip, pure Android experience with 7+ years of updates.</p>
+        <div class="price">$999</div>
+        <button>Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="https://i.pcmag.com/imagery/articles/036UGTdbJnfg2ho3tzG2gAm-1..v1759157734.jpg" alt="OnePlus 15" />
+        <h3>OnePlus 15</h3>
+        <p>Flagship killer with Hasselblad cameras, ultra-fast charging, and smooth OxygenOS.</p>
+        <div class="price">$799</div>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-us" id="why-us">
+    <h2>Why Choose PhoneHub Pro?</h2>
+    <ul>
+      <li>Authentic Devices with Full Warranty</li>
+      <li>Best Prices & Limited-Time Deals</li>
+      <li>Secure Payment & Fast Delivery</li>
+      <li>Expert Support 24/7</li>
+      <li>Easy Returns & Trade-Ins</li>
+    </ul>
+  </section>
+
+  <section class="cta" id="cta">
+    <h2>Upgrade Your Tech Today</h2>
+    <p>Join thousands of satisfied customers. Find your perfect 2025 smartphone now.</p>
+    <button onclick="scrollToSection('featured')">Start Shopping</button>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 PhoneHub Pro. All Rights Reserved.</p>
+</footer>
+
+<script>
+  function scrollToSection(id) {
+    const element = document.getElementById(id);
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1) || 'home';
+      scrollToSection(targetId);
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    header.classList.toggle('scrolled', window.scrollY > 50);
+
+    const sections = ['home', 'featured', 'why-us', 'cta'];
+    let current = 'home';
+    sections.forEach(section => {
+      const el = document.getElementById(section);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 150) current = section;
+      }
+    });
+    document.querySelectorAll('nav a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('data-target') === current);
+    });
+  });
+
+  document.querySelectorAll('.product button').forEach(button => {
+    button.addEventListener('click', () => {
+      alert('Item added to cart! (Demo)');
+    });
+  });
+
+  // Simple search demo
+  document.querySelector('.search-bar input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      alert(`Searching for: ${e.target.value} (Demo functionality)`);
+    }
+  });
+</script>
+
+</body>
+</html>
